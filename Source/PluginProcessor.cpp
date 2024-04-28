@@ -147,10 +147,17 @@ void TapSynthAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juc
 
     // update per user input
     for (int i = 0; i < synth.getNumVoices(); ++i) {
-        if (auto voice = dynamic_cast<juce::SynthesiserVoice*>(synth.getVoice(i))) {
+        if (auto voice = dynamic_cast<SynthVoice*>(synth.getVoice(i))) {
             // osc controls
             // adsr
             // lfo
+
+            auto& attack = *apvts.getRawParameterValue("ATTACK");
+            auto& decay = *apvts.getRawParameterValue("DECAY");
+            auto& sustain = *apvts.getRawParameterValue("SUSTAIN");
+            auto& release = *apvts.getRawParameterValue("RELEASE");
+
+            voice->updateADSR(attack.load(), decay.load(), sustain.load(), release.load());
         }
     }
     
