@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="Up9HOF" name="tapSynth" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1">
+              addUsingNamespaceToJuceHeader="0" displaySplashScreen="1" jucerFormatVersion="1"
+              pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn">
   <MAINGROUP id="jBGYcJ" name="tapSynth">
     <GROUP id="{1CB0514E-A71B-86FD-C14B-B759EDCB4E36}" name="Source">
       <FILE id="C8XVbN" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
@@ -26,6 +27,7 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
@@ -51,6 +53,7 @@
         <MODULEPATH id="juce_graphics" path="../../../../../juce/JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../../../../juce/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../../../../juce/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../../../../juce/JUCE/modules"/>
       </MODULEPATHS>
     </VS2022>
   </EXPORTFORMATS>
