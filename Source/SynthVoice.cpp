@@ -15,7 +15,8 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound* sound) {
 }
 
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound* sound, int currentPichWheelPosition) {
-    osc.setFrequency(juce::MidiMessage::getMidiNoteInHertz(midiNoteNumber));
+    osc1.setFreq(midiNoteNumber);
+    osc2.setFreq(midiNoteNumber);
     adsr.noteOn();
 }
 
@@ -42,17 +43,14 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
     spec.sampleRate = sampleRate;
     spec.numChannels = outputChannels;
 
-    osc.prepare(spec);
+    osc1.prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
+    osc2.prepareToPlay(sampleRate, samplesPerBlock, outputChannels);
 
     gain.prepare(spec);
 
-    gain.setGainLinear(0.3f);
+    gain.setGainLinear(0.07f);
 
     isPrepared = true;
-}
-
-void SynthVoice::update(const float attack, const float decay, const float sustain, const float release) {
-    adsr.updateADSR(attack, decay, sustain, release);
 }
 
 void SynthVoice::renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int startSample, int numSamples) {
@@ -65,7 +63,9 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer< float >& outputBuffer, int s
     synthBuffer.clear();
 
     juce::dsp::AudioBlock<float> audioBlock{ synthBuffer };
-    osc.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
+
+    osc1.renderNextBlock(audioBlock);
+    osc2.renderNextBlock(audioBlock);
 
     gain.process(juce::dsp::ProcessContextReplacing<float>(audioBlock));
 
